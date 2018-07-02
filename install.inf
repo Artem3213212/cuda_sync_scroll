@@ -1,0 +1,20 @@
+[info]
+title=Sync Scroll
+desc=Some description
+type=cudatext-plugin
+subdir=cuda_sync_scroll
+homepage=
+
+[item1]
+section=events
+events=on_scroll
+
+[item2]
+section=commands
+caption=Sync Scroll\Vertical
+method=Vertical
+
+[item3]
+section=commands
+caption=Sync Scroll\Horizontal
+method=Horizontal
