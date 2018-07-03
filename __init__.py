@@ -2,26 +2,16 @@ import os
 from cudatext import *
 import cudatext_cmd as cmds
 
-fn_config = os.path.join(app_path(APP_DIR_SETTINGS), 'cuda_sync_scroll.ini')
-
-HorizontalScrol = True
-VerticalScrol = True
-
-def bool_to_str(v): return '1' if v else '0'
-def str_to_bool(s): return s=='1'
+HorizontalScrol = False
+VerticalScrol = False
 
 class Command:
     
     def __init__(self):
-        global HorizontalScrol
-        global VerticalScrol
-        HorizontalScrol = str_to_bool(ini_read(fn_config, 'op', 'HorizontalScrol', bool_to_str(HorizontalScrol)))
-        VerticalScrol = str_to_bool(ini_read(fn_config, 'op', 'VerticalScrol', bool_to_str(VerticalScrol)))
+        pass
 
     def config(self):
-        ini_write(fn_config, 'op', 'HorizontalScrol', bool_to_str(HorizontalScrol))
-        ini_write(fn_config, 'op', 'VerticalScrol', bool_to_str(VerticalScrol))
-        file_open(fn_config)
+        pass
         
     def Vertical(self):
         global VerticalScrol

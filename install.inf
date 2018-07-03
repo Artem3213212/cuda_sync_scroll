@@ -3,7 +3,7 @@ title=Sync Scroll
 desc=Some description
 type=cudatext-plugin
 subdir=cuda_sync_scroll
-homepage=
+homepage=https://github.com/Artem3213212/cuda_sync_scroll
 
 [item1]
 section=events
