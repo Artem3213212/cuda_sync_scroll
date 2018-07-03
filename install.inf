@@ -12,10 +12,10 @@ events=on_scroll
 
 [item2]
 section=commands
-caption=Sync Scroll\Vertical
+caption=Sync Scroll\Toggle sync vertical scrolling
 method=toggle_vert
 
 [item3]
 section=commands
-caption=Sync Scroll\Horizontal
+caption=Sync Scroll\Toggle sync horizontal scrolling
 method=toggle_horz
