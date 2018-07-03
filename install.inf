@@ -13,9 +13,9 @@ events=on_scroll
 [item2]
 section=commands
 caption=Sync Scroll\Vertical
-method=Vertical
+method=toggle_vert
 
 [item3]
 section=commands
 caption=Sync Scroll\Horizontal
-method=Horizontal
+method=toggle_horz
