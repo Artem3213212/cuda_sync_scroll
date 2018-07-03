@@ -13,11 +13,11 @@ class Command:
     def config(self):
         pass
         
-    def Vertical(self):
+    def toggle_vert(self):
         global VerticalScrol
         VerticalScrol=not VerticalScrol
 
-    def Horizontal(self):
+    def toggle_horz(self):
         global HorizontalScrol
         HorizontalScrol=not HorizontalScrol
 
@@ -36,59 +36,4 @@ class Command:
                 e=Editor(h)
                 e.set_prop(PROP_SCROLL_HORZ,pos)
                 e.cmd(cmds.cmd_RepaintEditor)
-        
-"""
-AAAAAAAAAAAAAAAAAAA
-a 
-wsv
-fa
-e
-fa
-s
-ea
-f
-a
-e
-
-as
-d
-as
-df
-a
-sd
-f
-as
-df
-as
-d
-fa
-sd
-fa
-sdf
-a
-d
-f
-as
-fd
-as
-df
-a
-
-fd
-as
-f
-das
-f
-da
-sf
-
-das
-fa
-
-df
-a
-df
-a
-sdf
-
-"""
+           
