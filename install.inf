@@ -1,6 +1,6 @@
 [info]
 title=Sync Scroll
-desc=Some description
+desc=Synchronizes vertical and/or horizontal scrolling of editors in groups 1 and 2
 type=cudatext-plugin
 subdir=cuda_sync_scroll
 homepage=https://github.com/Artem3213212/cuda_sync_scroll
