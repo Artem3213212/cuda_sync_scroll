@@ -2,9 +2,6 @@ import os
 from cudatext import *
 import cudatext_cmd as cmds
 
-HorizontalScrol = False
-VerticalScrol = False
-
 def CallBackUpdate():
     if VerticalScrol or HorizontalScrol:
         if GROUPS_ONE==app_proc(PROC_GET_GROUPING,''):
@@ -16,25 +13,24 @@ def CallBackUpdate():
     
 
 class Command:
+    sync_v = False
+    sync_h = False
+    
     def __init__(self):
         pass
 
     def config(self):
         pass
-
-    def Vertical(self):
-        global VerticalScrol
-        VerticalScrol=not VerticalScrol
+        
+    def toggle_vert(self):
+        self.sync_v = not self.sync_v
         CallBackUpdate()
 
-    def Horizontal(self):
-        global HorizontalScrol
-        HorizontalScrol=not HorizontalScrol
+    def toggle_horz(self):
+        self.sync_h = not self.sync_h
         CallBackUpdate()
 
     def on_scroll(self,ed_self):
-        global HorizontalScrol
-        global VerticalScrol
         vpos=ed_self.get_prop(PROP_SCROLL_VERT)
         hpos=ed_self.get_prop(PROP_SCROLL_HORZ)
         n=ed_self.get_prop(PROP_INDEX_GROUP)
@@ -43,9 +39,9 @@ class Command:
                 continue
             e=ed_group(i)
             if e!=None:
-                if VerticalScrol:
+                if self.sync_v:
                     e.set_prop(PROP_SCROLL_VERT,vpos)
-                if HorizontalScrol:
+                if self.sync_h:
                     e.set_prop(PROP_SCROLL_HORZ,hpos)
                 e.cmd(cmds.cmd_RepaintEditor)
                 
