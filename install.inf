@@ -6,15 +6,12 @@ subdir=cuda_sync_scroll
 homepage=https://github.com/Artem3213212/cuda_sync_scroll
 
 [item1]
-section=events
-events=on_scroll
+section=commands
+caption=Sync Scroll\Horizontal
+method=Horizontal
 
 [item2]
 section=commands
 caption=Sync Scroll\Vertical
 method=Vertical
 
-[item3]
-section=commands
-caption=Sync Scroll\Horizontal
-method=Horizontal
