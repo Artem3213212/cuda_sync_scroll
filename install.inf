@@ -4,6 +4,7 @@ desc=Synchronizes vertical and/or horizontal scrolling of editors in groups 1 an
 type=cudatext-plugin
 subdir=cuda_sync_scroll
 homepage=https://github.com/Artem3213212/cuda_sync_scroll
+api=1.0.248
 
 [item1]
 section=events
