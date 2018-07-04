@@ -38,17 +38,14 @@ class Command:
     def on_scroll(self,ed_self):
         vpos=ed_self.get_prop(PROP_SCROLL_VERT)
         hpos=ed_self.get_prop(PROP_SCROLL_HORZ)
-        n=ed_self.get_prop(PROP_INDEX_GROUP)
-        for i in range(6):
-            if i==n:
-                continue
-            e=ed_group(i)
-            if e!=None:
-                if self.sync_v:
-                    e.set_prop(PROP_SCROLL_VERT,vpos)
-                if self.sync_h:
-                    e.set_prop(PROP_SCROLL_HORZ,hpos)
-                e.cmd(cmds.cmd_RepaintEditor)
+        grp=ed_self.get_prop(PROP_INDEX_GROUP)
+        e=ed_group(1 if grp==0 else 0)
+        if e is not None:
+            if self.sync_v:
+                e.set_prop(PROP_SCROLL_VERT,vpos)
+            if self.sync_h:
+                e.set_prop(PROP_SCROLL_HORZ,hpos)
+            e.cmd(cmds.cmd_RepaintEditor)
                 
     def on_state(self, ed_self, state):
         if state==APPSTATE_GROUPS:
@@ -56,60 +53,3 @@ class Command:
                 self.sync_h = False
                 self.sync_v = False
             self.update()
-
-
-"""
-AAAAAAAAAAAAAAAAAAA
-a 
-wsv
-fa
-e
-fa
-s
-ea
-f
-a
-e
-
-as
-d
-as
-df
-a
-sd
-f
-as
-df
-as
-d
-fa
-sd
-fa
-sdf
-a
-d
-f
-as
-fd
-as
-df
-a
-
-fd
-as
-f
-das
-f
-da
-sf
-
-das
-fa
-
-df
-a
-df
-a
-sdf
-
-"""
