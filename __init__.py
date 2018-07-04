@@ -2,14 +2,8 @@ import os
 from cudatext import *
 import cudatext_cmd as cmds
 
-def CallBackUpdate():
-    if VerticalScrol or HorizontalScrol:
-        if GROUPS_ONE==app_proc(PROC_GET_GROUPING,''):
-            app_proc(PROC_SET_EVENTS,__name__+';on_state;;')
-        else:
-            app_proc(PROC_SET_EVENTS,__name__+';on_scroll,on_state;;')
-    else:
-        app_proc(PROC_SET_EVENTS,__name__+';;;')
+def groups_ok():
+    return app_proc(PROC_GET_GROUPING,'') in [GROUPS_2HORZ, GROUPS_2VERT]
     
 
 class Command:
@@ -19,16 +13,27 @@ class Command:
     def __init__(self):
         pass
 
-    def config(self):
-        pass
-        
-    def toggle_vert(self):
-        self.sync_v = not self.sync_v
-        CallBackUpdate()
+    def update(self):
+        act = (self.sync_v or self.sync_h) and groups_ok()
+        if act:
+            ev = 'on_scroll,on_state'
+            msg_status('Sync Scroll: active')
+        else:
+            ev = ''
+            msg_status('Sync Scroll: inactive')
+        app_proc(PROC_SET_EVENTS,__name__+';'+ev+';;')
 
+    def toggle_vert(self):
+        if not groups_ok():
+            return msg_status('Cannot activate Sync Scroll for current groups mode')
+        self.sync_v = not self.sync_v
+        self.update()
+        
     def toggle_horz(self):
+        if not groups_ok():
+            return msg_status('Cannot activate Sync Scroll for current groups mode')
         self.sync_h = not self.sync_h
-        CallBackUpdate()
+        self.update()
 
     def on_scroll(self,ed_self):
         vpos=ed_self.get_prop(PROP_SCROLL_VERT)
@@ -47,7 +52,10 @@ class Command:
                 
     def on_state(self, ed_self, state):
         if state==APPSTATE_GROUPS:
-            CallBackUpdate()
+            if not groups_ok():
+                self.sync_h = False
+                self.sync_v = False
+            self.update()
 
 
 """
