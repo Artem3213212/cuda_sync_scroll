@@ -1,3 +1,7 @@
 
+2019.04.15
++ use smooth scrolling (per pixel)
+* require CudaText 1.78.5
+
 2018.07.04
 initial
