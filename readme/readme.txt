@@ -8,6 +8,6 @@ on changing group-mode to another, plugin deactivates.
 plugin subscribes to editor event dinamically, so it don't slow down editor, if not active.
 
 authors:
-  Alexey (CudaText)
-  Artem Gavrilov (@Artem3213212)
+  Alexey Torgashin (CudaText)
+  Artem Gavrilov (@Artem3213212 at GitHub)
 license: MIT
