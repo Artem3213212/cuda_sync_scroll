@@ -1,4 +1,7 @@
 
+2022.02.16
+- fix: reentering to on_scroll method (-> slow down)
+
 2019.04.15
 + use smooth scrolling (per pixel)
 * require CudaText 1.78.5

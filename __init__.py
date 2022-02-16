@@ -5,10 +5,14 @@ import cudatext_cmd as cmds
 def groups_ok():
     return app_proc(PROC_GET_GROUPING,'') in [GROUPS_2HORZ, GROUPS_2VERT]
 
+def log(s):
+    #print(s)
+    pass
 
 class Command:
     sync_v = False
     sync_h = False
+    scroll = False
 
     def __init__(self):
         pass
@@ -37,6 +41,9 @@ class Command:
 
     def on_scroll(self,ed_self):
 
+        if self.scroll: return
+        self.scroll = True
+        log('on_scroll: '+ed_self.get_filename())
         info_v = ed_self.get_prop(PROP_SCROLL_VERT_INFO)
         info_h = ed_self.get_prop(PROP_SCROLL_HORZ_INFO)
         pos_v = info_v['smooth_pos']
@@ -57,13 +64,17 @@ class Command:
         #with scroll at end with non-equal height files
         if self.sync_v:
             if pos_v<max_v and pos_v<max2_v:
+                log('sync v: '+ed_self.get_filename())
                 e.set_prop(PROP_SCROLL_VERT_SMOOTH, pos_v)
 
         if self.sync_h:
             if pos_h<max_h and pos_h<max2_h:
+                log('sync h: '+ed_self.get_filename())
                 e.set_prop(PROP_SCROLL_HORZ_SMOOTH, pos_h)
 
+        log('repaint: '+ed_self.get_filename())
         e.cmd(cmds.cmd_RepaintEditor)
+        self.scroll = False
 
 
     def on_state(self, ed_self, state):
