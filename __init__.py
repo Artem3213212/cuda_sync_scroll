@@ -6,7 +6,7 @@ def groups_ok():
     return app_proc(PROC_GET_GROUPING,'') in [GROUPS_2HORZ, GROUPS_2VERT]
 
 def log(s):
-    #print(s)
+    #print('Sync Scroll: '+s)
     pass
 
 class Command:
@@ -22,26 +22,31 @@ class Command:
         if act:
             ev = 'on_scroll,on_state'
             msg_status('Sync Scroll: active')
+            log('active')
         else:
             ev = ''
             msg_status('Sync Scroll: inactive')
+            log('inactive')
         app_proc(PROC_SET_EVENTS,__name__+';'+ev+';;')
 
     def toggle_vert(self):
         if not groups_ok():
             return msg_status('Cannot activate Sync Scroll for current groups mode')
         self.sync_v = not self.sync_v
+        log('sync_v: '+repr(self.sync_v))
         self.update()
 
     def toggle_horz(self):
         if not groups_ok():
             return msg_status('Cannot activate Sync Scroll for current groups mode')
         self.sync_h = not self.sync_h
+        log('sync_h: '+repr(self.sync_h))
         self.update()
 
     def on_scroll(self,ed_self):
 
-        if self.scroll: return
+        if self.scroll:
+            return log('already in on_scroll')
         self.scroll = True
         log('on_scroll: '+ed_self.get_filename())
         info_v = ed_self.get_prop(PROP_SCROLL_VERT_INFO)
@@ -53,7 +58,9 @@ class Command:
 
         grp = ed_self.get_prop(PROP_INDEX_GROUP)
         e = ed_group(1 if grp==0 else 0)
-        if e is None: return
+        if e is None:
+            self.scroll = False
+            return
 
         info2_v = e.get_prop(PROP_SCROLL_VERT_INFO)
         info2_h = e.get_prop(PROP_SCROLL_HORZ_INFO)
