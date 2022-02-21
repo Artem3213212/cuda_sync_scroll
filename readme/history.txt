@@ -1,4 +1,7 @@
 
+2022.02.21
+- fix: sometimes, if 2nd group is cleared+filled, plugin stopped working (regression in 2022)
+
 2022.02.16
 - fix: reentering to on_scroll method (-> slow down)
 
